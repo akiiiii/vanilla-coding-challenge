@@ -19,13 +19,15 @@
       "syntax": "short"
     },
 
+    "array_indentation": true,
+    "trim_array_spaces": true,
+    "multiline_whitespace_before_semicolons": true,
+
     "trailing_comma_in_multiline": {
       "elements": ["arrays", "arguments", "parameters"]
     },
 
-    "binary_operator_spaces": {
-      "default": "align_single_space_minimal"
-    },
+    "binary_operator_spaces": true,
 
     "class_attributes_separation": {
       "elements": {
@@ -37,7 +39,8 @@
     },
 
     "method_argument_space": {
-      "on_multiline": "ensure_fully_multiline"
+      "on_multiline": "ensure_fully_multiline",
+      "keep_multiple_spaces_after_comma": false
     },
 
     "function_typehint_space": true,

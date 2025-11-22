@@ -12,6 +12,11 @@ final readonly class Product
     ) {
     }
 
+    public function getSku(): string
+    {
+        return $this->sku;
+    }
+
     public function getPriceInCents(): int
     {
         return $this->priceInCents;
