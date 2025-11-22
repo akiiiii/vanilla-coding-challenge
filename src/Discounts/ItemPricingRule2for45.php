@@ -8,6 +8,10 @@ use App\Model\Product;
 
 final class ItemPricingRule2for45 implements ItemPricingRuleInterface
 {
+    private const GROUP_SIZE = 2;
+
+    private const SPECIAL_PRICE = 45;
+
     public function applies(string $productSku): bool
     {
         return $productSku === 'B';
@@ -18,13 +22,25 @@ final class ItemPricingRule2for45 implements ItemPricingRuleInterface
      */
     public function getDiscountedPriceInCents(array $products): int
     {
-        $unitPrice = $products[0]->getPriceInCents(); // this sux, but ok for now
-        $totalItems = count($products);
-        $setsOfThree = intdiv($totalItems, 2);
-        $remainingItems = $totalItems % 2;
-        $priceForSets = $setsOfThree * 45;
-        $priceForRemaining = $remainingItems * $unitPrice;
+        $groupCount = $this->countGroups($products);
+        $priceForGroups = $groupCount * self::SPECIAL_PRICE;
 
-        return $priceForSets + $priceForRemaining;
+        // remove the products included in discounted groups
+        $remaining = array_slice($products, $groupCount * self::GROUP_SIZE);
+
+        $priceForRemaining = 0;
+        foreach ($remaining as $product) {
+            $priceForRemaining += $product->getPriceInCents();
+        }
+
+        return $priceForGroups + $priceForRemaining;
+    }
+
+    /**
+     * @param array<int, Product> $products
+     */
+    private function countGroups(array $products): int
+    {
+        return intdiv(count($products), self::GROUP_SIZE);
     }
 }
