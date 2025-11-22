@@ -46,6 +46,9 @@
     },
     "concat_space": {
       "spacing": "one"
-    }
+    },
+
+    "no_empty_phpdoc": true,
+    "no_superfluous_phpdoc_tags": true
   }
 }
