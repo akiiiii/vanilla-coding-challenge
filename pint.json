@@ -2,30 +2,50 @@
   "preset": "psr12",
   "rules": {
     "declare_strict_types": true,
+
     "no_unused_imports": true,
     "ordered_imports": {
       "sort_algorithm": "alpha"
     },
+
     "single_quote": true,
     "no_trailing_whitespace": true,
+
     "no_extra_blank_lines": {
-      "tokens": ["extra", "throw", "return"]
+      "tokens": ["extra", "throw", "return", "continue", "break"]
     },
+
     "array_syntax": {
       "syntax": "short"
     },
+
     "trailing_comma_in_multiline": {
-      "elements": ["arrays"]
+      "elements": ["arrays", "arguments", "parameters"]
     },
+
     "binary_operator_spaces": {
       "default": "align_single_space_minimal"
     },
+
     "class_attributes_separation": {
       "elements": {
         "const": "one",
         "property": "one",
-        "method": "one"
+        "method": "one",
+        "trait_import": "one"
       }
+    },
+
+    "method_argument_space": {
+      "on_multiline": "ensure_fully_multiline"
+    },
+
+    "function_typehint_space": true,
+    "cast_spaces": {
+      "space": "single"
+    },
+    "concat_space": {
+      "spacing": "one"
     }
   }
 }
