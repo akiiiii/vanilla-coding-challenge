@@ -1,2 +1,2 @@
-# vanilla-coding-challenge
+# akiiiii
 Small coding challenge project
