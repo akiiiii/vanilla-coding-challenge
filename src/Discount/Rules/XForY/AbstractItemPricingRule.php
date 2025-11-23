@@ -6,7 +6,7 @@ namespace App\Discount\Rules\XForY;
 
 use App\Discount\Rules\ItemPricingRuleInterface;
 use App\Discount\Strategies\PricingStrategyInterface;
-use App\Discount\Strategies\XForYPricingStrategy;
+use App\Discount\Strategies\XForY\XForYPricingStrategy;
 use App\Model\Product;
 
 abstract class AbstractItemPricingRule implements ItemPricingRuleInterface

@@ -2,8 +2,9 @@
 
 declare(strict_types=1);
 
-namespace App\Discount\Strategies;
+namespace App\Discount\Strategies\XForY;
 
+use App\Discount\Strategies\PricingStrategyInterface;
 use App\Model\Product;
 
 final class XForYPricingStrategy implements PricingStrategyInterface
