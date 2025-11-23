@@ -4,43 +4,20 @@ declare(strict_types=1);
 
 namespace App\Discounts;
 
-use App\Model\Product;
-
-final class ItemPricingRule3for130 implements ItemPricingRuleInterface
+final class ItemPricingRule3for130 extends AbstractItemPricingRuleXforY
 {
-    private const GROUP_SIZE = 3;
-
-    private const SPECIAL_PRICE = 130;
-
-    public function applies(string $productSku): bool
+    protected function groupSize(): int
     {
-        return $productSku === 'A';
+        return 3;
     }
 
-    /**
-     * @param array<int, Product> $products
-     */
-    public function getDiscountedPriceInCents(array $products): int
+    protected function specialPrice(): int
     {
-        $setCount = $this->countGroups($products);
-        $priceForSets = $setCount * self::SPECIAL_PRICE;
-
-        // remove the products covered by discounted sets
-        $remaining = array_slice($products, $setCount * self::GROUP_SIZE);
-
-        $priceForRemaining = 0;
-        foreach ($remaining as $product) {
-            $priceForRemaining += $product->getPriceInCents();
-        }
-
-        return $priceForSets + $priceForRemaining;
+        return 130;
     }
 
-    /**
-     * @param array<int, Product> $products
-     */
-    private function countGroups(array $products): int
+    protected function sku(): string
     {
-        return intdiv(count($products), self::GROUP_SIZE);
+        return 'A';
     }
 }
