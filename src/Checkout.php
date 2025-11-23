@@ -14,9 +14,8 @@ final class Checkout
     /**
      * @param array<int, ItemPricingRuleInterface> $rules
      */
-    public function __construct(
-        array $rules = [],
-    ) {
+    public function __construct(array $rules = [])
+    {
         $this->scanner = new Scanner($rules);
     }
 
