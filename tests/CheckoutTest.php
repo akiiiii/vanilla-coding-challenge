@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace Tests;
 
 use App\Checkout;
-use App\Discounts\ItemPricingRule2for45;
-use App\Discounts\ItemPricingRule3for130;
+use App\Discounts\XForY\ItemPricingRule2for45;
+use App\Discounts\XForY\ItemPricingRule3for130;
 use App\Model\Product;
 use PHPUnit\Framework\TestCase;
 

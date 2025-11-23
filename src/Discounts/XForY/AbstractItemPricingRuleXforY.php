@@ -2,8 +2,9 @@
 
 declare(strict_types=1);
 
-namespace App\Discounts;
+namespace App\Discounts\XForY;
 
+use App\Discounts\ItemPricingRuleInterface;
 use App\Model\Product;
 
 abstract class AbstractItemPricingRuleXforY implements ItemPricingRuleInterface
