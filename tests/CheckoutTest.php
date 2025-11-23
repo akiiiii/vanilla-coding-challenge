@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Tests;
 
 use App\Checkout;
+use App\Discounts\DiscountEligibilityChecker;
 use App\Discounts\XForY\ItemPricingRule2for45;
 use App\Discounts\XForY\ItemPricingRule3for130;
 use App\Model\Product;
@@ -49,9 +50,11 @@ final class CheckoutTest extends TestCase
         $productA = new Product('A', 50);
 
         $checkout = new Checkout(
-            [
-                new ItemPricingRule3for130(),
-            ],
+            new DiscountEligibilityChecker(
+                [
+                    new ItemPricingRule3for130(),
+                ],
+            ),
         );
 
         $checkout->scan($productA);
@@ -66,9 +69,11 @@ final class CheckoutTest extends TestCase
         $productB = new Product('B', 30);
 
         $checkout = new Checkout(
-            [
-                new ItemPricingRule2for45(),
-            ],
+            new DiscountEligibilityChecker(
+                [
+                    new ItemPricingRule2for45(),
+                ],
+            ),
         );
 
         $checkout->scan($productB);
@@ -84,10 +89,12 @@ final class CheckoutTest extends TestCase
         $productD = new Product('D', 15);
 
         $checkout = new Checkout(
-            [
-                new ItemPricingRule3for130(),
-                new ItemPricingRule2for45(),
-            ],
+            new DiscountEligibilityChecker(
+                [
+                    new ItemPricingRule3for130(),
+                    new ItemPricingRule2for45(),
+                ],
+            ),
         );
 
         $checkout->scan($productA);
@@ -109,10 +116,12 @@ final class CheckoutTest extends TestCase
         $productD = new Product('D', 15);
 
         $checkout = new Checkout(
-            [
-                new ItemPricingRule3for130(),
-                new ItemPricingRule2for45(),
-            ],
+            new DiscountEligibilityChecker(
+                [
+                    new ItemPricingRule3for130(),
+                    new ItemPricingRule2for45(),
+                ],
+            ),
         );
 
         $checkout->scan($productD);
@@ -131,10 +140,12 @@ final class CheckoutTest extends TestCase
         $productB = new Product('B', 30);
 
         $checkout = new Checkout(
-            [
-                new ItemPricingRule3for130(),
-                new ItemPricingRule2for45(),
-            ],
+            new DiscountEligibilityChecker(
+                [
+                    new ItemPricingRule3for130(),
+                    new ItemPricingRule2for45(),
+                ],
+            ),
         );
 
         $this->assertEquals(0, $checkout->getTotal());

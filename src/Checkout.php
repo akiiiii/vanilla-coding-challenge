@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App;
 
+use App\Discounts\DiscountEligibilityChecker;
 use App\Discounts\ItemPricingRuleInterface;
 use App\Model\Product;
 
@@ -12,13 +13,15 @@ final class Checkout
     /** @var array<string, array<int, Product>> */
     private array $items = [];
 
-    /** @param array<int, ItemPricingRuleInterface> $pricingRules */
-    public function __construct(private array $pricingRules = [])
-    {
+    public function __construct(
+        private ?DiscountEligibilityChecker $discountEligibilityChecker = null,
+    ) {
     }
 
     public function scan(Product $product): void
     {
+        // item - discount -matching hier schon implementieren
+
         $this->items[$product->getSku()][] = $product;
     }
 
@@ -44,7 +47,10 @@ final class Checkout
 
     private function getPricingRuleForSku(string $sku): ?ItemPricingRuleInterface
     {
-        return array_find($this->pricingRules, fn ($rule) => $rule->applies($sku));
+        if ($this->discountEligibilityChecker === null) {
+            return null;
+        }
+        return array_find($this->discountEligibilityChecker->getPricingRules(), fn ($rule) => $rule->applies($sku));
     }
 
     /**
